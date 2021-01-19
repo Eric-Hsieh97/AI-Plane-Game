@@ -2,9 +2,9 @@
 import math
 import random
 
-# 神经网络3层, 1个隐藏层; 4个input和1个output
+# 神经网络3层, 1个隐藏层; 4个input和1个output (3 layers of neural network, 1 hidden layer; Four inputs and one output)
 network = [4, [16], 1]
-# 遗传算法相关
+# 遗传算法相关 (Genetic algorithm correlation)
 population = 50
 elitism = 0.2
 random_behaviour = 0.1
@@ -16,7 +16,7 @@ score_sort = -1
 n_child = 1
 
 
-# 激活函数
+# 激活函数 (The activation function)
 def sigmoid(z):
     return 1.0 / (1.0 + math.exp(-z))
 
@@ -26,7 +26,7 @@ def random_clamped():
     return random.random() * 2 - 1
 
 
-# "神经元"
+# "神经元" ("Neurons")
 class Neuron():
     def __init__(self):
         self.biase = 0
@@ -41,7 +41,7 @@ class Neuron():
         return 'Neuron weight size:{}  biase value:{}'.format(len(self.weights), self.biase)
 
 
-# 层
+# 层 (Layer)
 class Layer():
     def __init__(self, index):
         self.index = index
@@ -58,12 +58,14 @@ class Layer():
         return 'Layer ID:{}  Layer neuron size:{}'.format(self.index, len(self.neurons))
 
 
-# 神经网络
+# 神经网络 (Neuro Network)
 class NeuroNetwork():
     def __init__(self):
         self.layers = []
 
-    # input:输入层神经元数 hiddens:隐藏层 output:输出层神经元数
+    # input:输入层神经元数(Number of neurons in the input layer)
+    # hiddens:隐藏层(hiddens layer)
+    # output:输出层神经元数(Number of neurons in the output layer)
     def init_neuro_network(self, input, hiddens, output):
         index = 0
         previous_neurons = 0
@@ -112,6 +114,8 @@ class NeuroNetwork():
             self.layers.append(layer)
 
     # 输入游戏环境中的一些条件(如敌机位置), 返回要执行的操作
+    # (Enter some of the conditions in the game environment
+    # (such as the location of enemy aircraft) and return the action to be performed)
     def feed_forward(self, inputs):
         for i in range(len(inputs)):
             self.layers[0].neurons[i].biase = inputs[i]
@@ -139,7 +143,7 @@ class NeuroNetwork():
             print(layer)
 
 
-# "基因组"
+# "基因组"(Genome Group)
 class Genome():
     def __init__(self, score, network_weights):
         self.score = score
@@ -161,7 +165,7 @@ class Generation():
                     break
         self.genomes.insert(i, genome)
 
-    # 杂交+突变
+    # 杂交+突变(Hybridization + mutation)
     def breed(self, genome1, genome2, n_child):
         datas = []
         for n in range(n_child):
@@ -176,7 +180,7 @@ class Generation():
             datas.append(data)
         return datas
 
-    # 生成下一代
+    # 生成下一代 (generate_next_generation)
     def generate_next_generation(self):
         nexts = []
         for i in range(int(elitism * population)):
