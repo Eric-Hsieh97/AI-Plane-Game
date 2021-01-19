@@ -98,13 +98,13 @@ class Game():
         pygame.init()
         self.screen = pygame.display.set_mode(SCREEN_SIZE)
         self.clock = pygame.time.Clock()
-        pygame.display.set_caption('是AI就躲个飞机')
+        pygame.display.set_caption('是AI就躲个飞机 AI Plane Avoiding obstacles')
 
         self.ai = neuro_evolution.NeuroEvolution()
         self.generation = 0
 
         self.max_enemes = 1
-        # 加载飞机、敌机图片
+        # 加载飞机、敌机图片 Load pictures of aircraft and enemy aircraft
         self.plane_image = pygame.image.load('plane.png').convert_alpha()
         self.enemy_image = pygame.image.load('emmy.png').convert_alpha()
 
